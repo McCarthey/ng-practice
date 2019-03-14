@@ -27,4 +27,8 @@ export class HeroDetailComponent implements OnInit {
     console.log(this.hero)
   }
 
+  goBack():void {
+    this.location.back()
+  }
+
 }
