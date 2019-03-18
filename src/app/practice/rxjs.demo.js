@@ -124,7 +124,7 @@ const Rx = require('rxjs/Rx')
 // var example = clicks.mergeMap(ev => Rx.Observable.interval(1000))
 // example.subscribe(x => console.log(x + 1)) // 和上一段代码等效
 
-// mergeMap示例2：连续发送请求时，将处理每一个请求
+// mergeMap示例2：每点击一次，会出现一次请求(不同于concatMap)，请求会依次返回
 // function getPostData() {
 //     return fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json())
 // }
@@ -136,4 +136,24 @@ const Rx = require('rxjs/Rx')
 //     complete: () => console.log('Finished')
 // })
 
+
+// concatMap, switchMap, mergeMap共同点： 
+// 这三个 operators 可以把第一个参数返回的 promise 直接转成 observable，这样我们就不用再用 Rx.Observable.from 转一次
+// function getPersonData() {
+//     return fetch('https://jsonplaceholder.typicode.com/posts/1')
+//     .then(res => res.json())
+// }
+// var source = Rx.Observable.fromEvent(document.body, 'click');
+
+// var example = source.concatMap(e => getPersonData()); // 此处可以不需要Rx.Observable.from()方法
+
+// example.subscribe({
+//     next: (value) => { console.log(value); },
+//     error: (err) => { console.log('Error: ' + err); },
+//     complete: () => { console.log('complete'); }
+// }); 
+
+// concatMap, switchMap, mergeMap的使用场景：
+// - 建议初学者不确定选哪一个时，使用 switchMap
+// - 使用concatMap和mergeMap时，过快触发（内部Observable结束过慢）将会引起内存问题
 
