@@ -95,14 +95,45 @@ const Rx = require('rxjs/Rx')
 // example.subscribe(x => console.log(x))  // 和上一段代码等效
 
 // switchMap示例2：连续发送请求，仅最后一个有打印（返回）
-function getPostData() {
-    return fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json())
-}
-var source = Rx.Observable.fromEvent(document.body, 'click')
-var example = source.switchMap(e => Rx.Observable.from(getPostData()))
-example.subscribe({
-    next: value => console.log(value),
-    error: err => console.log(`Error ${err}`),
-    complete: () => console.log('Finished')
-})
+// function getPostData() {
+//     return fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json())
+// }
+// var source = Rx.Observable.fromEvent(document.body, 'click')
+// var example = source.switchMap(e => Rx.Observable.from(getPostData()))
+// example.subscribe({
+//     next: value => console.log(value),
+//     error: err => console.log(`Error ${err}`),
+//     complete: () => console.log('Finished')
+// })
+
+
+// merge: 通过把多个 Observables 的值混合到一个 Observable 中 来将其打平。
+// var clicks = Rx.Observable.fromEvent(document, 'click');
+// var timer = Rx.Observable.interval(1000);
+// var clicksOrTimer = clicks.merge(timer);
+// clicksOrTimer.subscribe(x => console.log(x));
+
+// mergeAll: 将高阶 Observable 转换成一阶 Observable ，一阶 Observable 会同时发出在内部 Observables 上发出的所有值
+// var clicks = Rx.Observable.fromEvent(document, 'click');
+// var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
+// var firstOrder = higherOrder.mergeAll();
+// firstOrder.subscribe(x => console.log(x));
+
+// mergeMap：将每个值映射成 Observable ，然后使用 mergeAll 打平所有的内部 Observables 。等同于map + merge
+// var clicks = Rx.Observable.fromEvent(document, 'click')
+// var example = clicks.mergeMap(ev => Rx.Observable.interval(1000))
+// example.subscribe(x => console.log(x + 1)) // 和上一段代码等效
+
+// mergeMap示例2：连续发送请求时，将处理每一个请求
+// function getPostData() {
+//     return fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json())
+// }
+// var source = Rx.Observable.fromEvent(document.body, 'click')
+// var example = source.mergeMap(e => Rx.Observable.from(getPostData()))
+// example.subscribe({
+//     next: value => console.log(value),
+//     error: err => console.log(`Error ${err}`),
+//     complete: () => console.log('Finished')
+// })
+
 
