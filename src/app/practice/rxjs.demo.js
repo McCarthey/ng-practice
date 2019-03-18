@@ -66,3 +66,20 @@ const Rx = require('rxjs/Rx')
 // var clicks = Rx.Observable.fromEvent(document, 'click');
 // var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
 // result.subscribe(x => console.log(x)); // 和上一段代码等效
+
+// concatMap实例2
+// function getPostData() {
+//     return fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json())
+// }
+
+// var source = Rx.Observable.fromEvent(document.body, 'click')
+
+// var example = source.concatMap(e => Rx.Observable.from(getPostData()))
+
+// example.subscribe({
+//     next: value => console.log(value),
+//     error: err => console.log(`Error ${err}`),
+//     complete: () => console.log('Finished')
+    
+// })
+
