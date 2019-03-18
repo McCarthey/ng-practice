@@ -1,3 +1,8 @@
+/**
+ * 本文件内代码段均可使用在线JSBin测试
+ * https://jsbin.com/nuhita/5/edit?js,console,output
+ */
+
 const Rx = require('rxjs/Rx')
 /** 
  * Observable被称为可观察序列，简单来说数据就在Observable中流动，你可以使用各种operator对流处理，例如：
@@ -44,10 +49,20 @@ const Rx = require('rxjs/Rx')
 // example.subscribe(console.log) // 只有订阅后才会执行
 
 // Observable 渐进式运算
-var source = Rx.Observable.from([1,2,3]);
-var example = source
-              .filter(x => x % 2 === 0)
-              .map(x => x + 1)
+// var source = Rx.Observable.from([1,2,3]);
+// var example = source
+//               .filter(x => x % 2 === 0)
+//               .map(x => x + 1)
 
-example.subscribe(console.log);
+// example.subscribe(console.log);
 
+// concatAll：顺序的连接内部Observable，将高阶Observable转化为一阶Observable(打平)
+// var clicks = Rx.Observable.fromEvent(document, 'click');
+// var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
+// var firstOrder = higherOrder.concatAll();
+// firstOrder.subscribe(x => console.log(x)) // 对于每一次点击，都将每隔1秒分别输出0-1-2-3，0-1-2-3，……
+
+// concatMap：将每个值映射为 Observable, 然后使用concatAll将所有的 内部 Observables 打平。等同于 map + concatAll
+// var clicks = Rx.Observable.fromEvent(document, 'click');
+// var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
+// result.subscribe(x => console.log(x)); // 和上一段代码等效
