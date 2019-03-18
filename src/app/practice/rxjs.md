@@ -1,4 +1,16 @@
 
+#### Observable的特点
+- 延迟执行：不像promise一样是立即执行，只有调用了subscribe的时候Observable才会执行
+- 渐进式取值：不像数组的方法map, filter等（链式调用时，它们是返回全部数组后，再执行后面的操作符），Observable的调用是将每个元素运算到底，而不是运算完全部的元素再返回。
+例如：
+```javascript
+var source = Rx.Observable.from([1,2,3,4,5]);
+var example = source.map(x => x + 1); // 此处不会执行
+
+example.subscribe(console.log) // 只有订阅后才会执行
+```
+
+
 ```javascript
 const Rx = require('rxjs/Rx')
 /** 

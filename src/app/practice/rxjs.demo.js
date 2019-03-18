@@ -31,9 +31,15 @@ const Rx = require('rxjs/Rx')
  * 所有的输入 Observable 都完成了，输出 Observable 才能完成。该 Observable 发出的项是每个输入 Observable 的结果。 
  */
 // exp2-1
-var timer1 = Rx.Observable.interval(1000).take(10);
-var timer2 = Rx.Observable.interval(2000).take(6);
-var timer3 = Rx.Observable.interval(500).take(10);
-var merged = timer1.merge(timer2, timer3);
-merged.subscribe(x => console.log(x));
+// var timer1 = Rx.Observable.interval(1000).take(10);
+// var timer2 = Rx.Observable.interval(2000).take(6);
+// var timer3 = Rx.Observable.interval(500).take(10);
+// var merged = timer1.merge(timer2, timer3);
+// merged.subscribe(x => console.log(x));
+
+// Observable 懒执行
+var source = Rx.Observable.from([1,2,3,4,5]);
+var example = source.map(x => x + 1); // 此处不会执行
+
+example.subscribe(console.log) // 只有订阅后才会执行
 
