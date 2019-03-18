@@ -9,6 +9,23 @@ var example = source.map(x => x + 1); // 此处不会执行
 
 example.subscribe(console.log) // 只有订阅后才会执行
 ```
+```javascript
+// 数组操作
+var source = [1,2,3];
+var example = source
+              .filter(x => x % 2 === 0) // 返回一个完整的数组
+              .map(x => x + 1) // 也会运算并返回一个完整的数组
+
+// Observable操作
+var source = Rx.Observable.from([1,2,3]);
+var example = source
+              .filter(x => x % 2 === 0)
+              .map(x => x + 1)
+
+example.subscribe(console.log);
+// 1. 1被过滤； 2. 2符合条件，然后+1，输出3； 3. 3被过滤
+// 即每个元素送出后就是运算到底，在这个过程中不会等待其他的元素运算。
+```
 
 
 ```javascript

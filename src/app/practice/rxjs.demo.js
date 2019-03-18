@@ -38,8 +38,16 @@ const Rx = require('rxjs/Rx')
 // merged.subscribe(x => console.log(x));
 
 // Observable 懒执行
-var source = Rx.Observable.from([1,2,3,4,5]);
-var example = source.map(x => x + 1); // 此处不会执行
+// var source = Rx.Observable.from([1,2,3,4,5]);
+// var example = source.map(x => x + 1); // 此处不会执行
 
-example.subscribe(console.log) // 只有订阅后才会执行
+// example.subscribe(console.log) // 只有订阅后才会执行
+
+// Observable 渐进式运算
+var source = Rx.Observable.from([1,2,3]);
+var example = source
+              .filter(x => x % 2 === 0)
+              .map(x => x + 1)
+
+example.subscribe(console.log);
 

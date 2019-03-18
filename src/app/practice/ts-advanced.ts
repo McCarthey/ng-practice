@@ -17,3 +17,4 @@ function getName(n: NameOrResolver): Name {
         return n()
     }
 }
+
