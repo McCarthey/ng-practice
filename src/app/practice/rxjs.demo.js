@@ -67,7 +67,7 @@ const Rx = require('rxjs/Rx')
 // var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
 // result.subscribe(x => console.log(x)); // 和上一段代码等效
 
-// concatMap实例2
+// concatMap实例2：连续发送请求
 // function getPostData() {
 //     return fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json())
 // }
@@ -80,6 +80,29 @@ const Rx = require('rxjs/Rx')
 //     next: value => console.log(value),
 //     error: err => console.log(`Error ${err}`),
 //     complete: () => console.log('Finished')
-    
 // })
+
+
+// switch：一旦有新的内部 Observable 出现，通过丢弃前一个，将 高级 Observable 打平
+// var clicks = Rx.Observable.fromEvent(document.body, 'click')
+// var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(5))
+// var switched = higherOrder.switch()
+// switched.subscribe(x => console.log(x))
+
+// switchMap: 只要注意一个重点 switchMap 会在下一个 observable 被送出后直接退订前一个未处理完的 observable。等同于map + switch
+// var clicks = Rx.Observable.fromEvent(document.body, 'click')
+// var example = clicks.switchMap(e => Rx.Observable.interval(1000).take(5))
+// example.subscribe(x => console.log(x))  // 和上一段代码等效
+
+// switchMap示例2：连续发送请求，仅最后一个有打印（返回）
+function getPostData() {
+    return fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json())
+}
+var source = Rx.Observable.fromEvent(document.body, 'click')
+var example = source.switchMap(e => Rx.Observable.from(getPostData()))
+example.subscribe({
+    next: value => console.log(value),
+    error: err => console.log(`Error ${err}`),
+    complete: () => console.log('Finished')
+})
 
