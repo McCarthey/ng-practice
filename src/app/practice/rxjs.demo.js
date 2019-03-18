@@ -1,11 +1,20 @@
+
 /**
  * 本文件内代码段均可使用在线JSBin测试
  * https://jsbin.com/nuhita/5/edit?js,console,output
  */
 
+/**
+ * Observer(观察者对象): 一个回调函数的集合，它知道如何去监听由 Observable 提供的值。
+ * Observable(可观察对象): 表示一个概念，这个概念是一个可调用的未来值或事件的集合。
+ * subscribe(订阅): 表示 Observable 的执行，主要用于取消 Observable 的执行。
+ */
+
+
+
 const Rx = require('rxjs/Rx')
 /** 
- * Observable被称为可观察序列，简单来说数据就在Observable中流动，你可以使用各种operator对流处理，例如：
+ * Observable被称为可观察对象，简单来说数据就在Observable中流动，你可以使用各种operator对流处理，例如：
  */
 // const ob = Rx.Observable.interval(1000)
 // ob.take(3).map(n => n * 2).filter(n => n >= 2).subscribe({

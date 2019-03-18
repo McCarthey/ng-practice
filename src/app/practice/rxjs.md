@@ -1,3 +1,33 @@
+### 函数式编程（FP）
+不是所有的语言都支持FP，想要使用函数式编程模式，在这门语言中函数须是一等公民
+#### 函数式编程的重要特性
+Expression, no statement: 是表达式（有返回值）
+#### 纯函数
+纯函数指的是一个函数接受相同的参数，将返回相同的值，没有任何显著的副作用(side effect),例如:
+```javascript
+// 纯函数slice()
+var arr = [1,2,3,4,5]
+
+arr.slice(0,3) // [1, 2, 3]
+arr.slice(0,3) // [1, 2, 3]
+arr.slice(0,3) // [1, 2, 3]
+
+// 非纯函数splice()
+arr.splice(0,3) // [1, 2, 3]
+arr.splice(0,3) // [4, 5]
+arr.splice(0,3) // []
+```
+#### 副作用(side effect)
+副作用是指函数做了跟本身运算返回值无关的事，比如修改全局变量，修改传入函数，执行console.log等。
+
+前端常见的side effect：
+- 发送http request
+- 打印值
+- 获取用户input
+- query DOM
+
+### 响应式编程（RP） 
+
 
 ## Observable
 ```javascript
